@@ -1,5 +1,6 @@
-def main():
-    print("Hello, World!")
+import ui
+from ui_main import MyGUI
 
 if __name__ == "__main__":
-    main()
+    # ui.main()
+    MyGUI()

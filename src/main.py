@@ -1,6 +1,5 @@
-import ui
-from ui_main import MyGUI
+from ui.ui import MainGUI
+from db.db import DB
 
 if __name__ == "__main__":
-    # ui.main()
-    MyGUI()
+    gui = MainGUI()

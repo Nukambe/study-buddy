@@ -1,10 +1,24 @@
 import sqlite3
 
 class DB:
+    _instance = None
+
     def __init__(self):
         self.conn = sqlite3.connect("study_buddy.db")
         self.cursor = self.conn.cursor()
         self.create_tables()
+
+    def __new__(cls):
+        """
+        singleton pattern to ensure only one instance is created and shared across modules.
+        """
+        if not cls._instance:
+            cls._instance = super(DB, cls).__new__(cls)
+            print("Create DB")
+        return cls._instance
+
+    def __str__(self):
+        return f"DATABASE:\nnotes: {self.get_notes()}"
 
     def query(self, query, params=None):
         if params:
@@ -31,6 +45,3 @@ class DB:
 
     def get_notes(self):
         return self.query("SELECT * FROM notes")
-
-db = DB()
-print("called db")

@@ -1,11 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 from ui.note import Note
-from db.db import db
+from handler import get_db
 
 class Notes:
 
     def __init__(self, tab) -> None:
+        self.db = get_db()
         self.frame = ttk.Frame(tab)
 
         self.notes = tk.Canvas(self.frame, height=500)
@@ -22,7 +23,7 @@ class Notes:
         self.load_notes()
 
     def load_notes(self):
-        notes = db.get_notes()
+        notes = self.db.get_notes()
         for note in notes:
             Note(self.notes, note)
 

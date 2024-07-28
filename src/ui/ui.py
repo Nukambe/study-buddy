@@ -1,6 +1,8 @@
+import sys
 import tkinter as tk
 from tkinter import messagebox, ttk
 from ui.notes import Notes
+from handler import join_threads
 
 class MainGUI:
 
@@ -67,4 +69,6 @@ class MainGUI:
 
     def on_close(self):
         # if messagebox.askyesno(title="Quit?", message="Do you really want to quit?"):
+        join_threads()
         self.root.destroy()
+        sys.exit()

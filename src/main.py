@@ -1,4 +1,5 @@
 import os
+import sys
 from importlib import reload
 import threading
 from ui.ui import MainGUI
@@ -25,6 +26,10 @@ class StudyBuddy:
         self.r.start()
         self.m.start()
 
+    def restart_script(self):
+        python = sys.executable
+        os.execv(python, [python] + sys.argv)
+
     def refresh(self):
         for module in self.file_modifications:
             self.file_modifications[module][2] = os.path.getmtime(self.file_modifications[module][1])
@@ -36,6 +41,7 @@ class StudyBuddy:
                     print("Reloading", module)
                     reload(module)
                     self.file_modifications[_import][2] = last_mod
+                    self.restart_script()
         self.stop_event.wait(1)
 
     def main(self):

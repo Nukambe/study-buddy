@@ -27,7 +27,7 @@ class MainGUI:
         self.tab_control.pack(expand=1, fill="both")
         # Tabs - Note
         self.notes_tab = ttk.Frame(self.tab_control)
-        Notes(self.notes_tab)
+        self.notes_component = Notes(self.notes_tab)
         self.tab_control.add(self.notes_tab, text="Notes")
         # Tabs - Study
         self.study_tab = ttk.Frame(self.tab_control)
